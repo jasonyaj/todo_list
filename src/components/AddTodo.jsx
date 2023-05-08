@@ -3,8 +3,8 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
 const AddTodo = (props) => {
-  const [todo, setTodo] = useState('');
-  const [completed, setCompleted] = useState(false);
+  const [todo, setTodo] = useState([]);
+  // const [completed, setCompleted] = useState(false);
 
   // form submit function - that will add to state
   const formSubmit = (e) => {
@@ -13,7 +13,7 @@ const AddTodo = (props) => {
     // create the obj here
     const newTodo = {
       todo,
-      completed
+      completed: false
     };
 
     // execute the function coming from props

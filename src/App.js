@@ -20,7 +20,7 @@ function App() {
     },
     {
       todo: "Oil change",
-      completed: false
+      completed: true
     }
   ])
 
@@ -33,12 +33,18 @@ function App() {
 
   // add in a new todo and update list
   const updateTodo = (newObj) => {
-    console.log(newObj);
     setTodo([...todo, newObj]);
+  }
+
+  const checkClick = (idx) => {
+    const newCompleted = [...todo]; //duplicate array of boolean(checked boxes)
+    newCompleted[idx].completed = !newCompleted[idx].completed; //true/false trigger
+    setTodo(newCompleted); //sets updated array of boolean with newCompleted
   }
 
   return (
     <Container>
+      {/* {JSON.stringify(todo)} */}
       <Row>
         <Col className='d-flex justify-content-center'>
           <AddTodo updateTodo = {updateTodo} />
@@ -46,7 +52,7 @@ function App() {
       </Row>
       <Row>
         <Col>
-          <Todo todo={todo} deleteOne = {deleteOne}/>
+          <Todo todo={todo} deleteOne = {deleteOne} checkClick = {checkClick}/>
         </Col>
       </Row>
     </Container>

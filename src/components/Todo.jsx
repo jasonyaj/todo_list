@@ -5,15 +5,10 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 const Todo = (props) => {
-  
-  // array of boolean for true or false checked boxes
-  const [completed, setCompleted] = useState(props.todo.map(() => false))
 
   // update list of array of checked boxes
   const handleCheck = (idx) => {
-    const newCompleted = [...completed]; //duplicate array of boolean(checked boxes)
-    newCompleted[idx] = !newCompleted[idx]; //true/false trigger
-    setCompleted(newCompleted); //sets updated array of boolean with newCompleted
+    props.checkClick(idx)
   }
 
    // delete a specific todo item
@@ -30,7 +25,11 @@ const Todo = (props) => {
               <Row>
                 <Col className='d-flex justify-content-end'>
                   <p key={idx}>
-                    Todo: <span className="me-3">{eachTodo.todo}</span>
+                    Todo: <span className="me-3">
+                      
+                      {eachTodo.completed === true?
+                      <s>{eachTodo.todo}</s>
+                      : eachTodo.todo}</span>
                   </p>
                 </Col>
                 <Col>
@@ -40,7 +39,7 @@ const Todo = (props) => {
                       <input
                         className='me-5 ms-2'
                         type="checkbox"
-                        checked={completed[idx]}
+                        checked={eachTodo.completed}
                         onChange={() => handleCheck(idx)}
                       />
                       <Button onClick={() => handleDeleteClick(idx)}>Delete</Button>
